@@ -1,0 +1,20 @@
+#!/bin/busybox echo "This file is sourced from /init"
+
+live=${live}
+echo live=${live}
+
+if [ ! -z "$live"]; then
+   echo "Mounting live media"
+   mount $(findfs ${live}) /live
+fi
+
+if [ -r /live/boot/autostart.sh ]; then
+  echo Executing /live/boot/autostart.sh
+   . /live/boot/autostart.sh
+fi
+
+
+while true; do
+setsid cttyhack /bin/sh
+done
+

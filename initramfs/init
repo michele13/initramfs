@@ -1,0 +1,23 @@
+#!/bin/sh
+
+PATH=/bin:/bin/applets
+export PATH
+
+dmesg -n 1
+echo "Mounting /dev"
+mount -t devtmpfs none /dev
+
+echo "Mounting /proc"
+mount -t proc none /proc
+
+echo "Mounting /sys"
+mount -t sysfs none /sys
+
+
+if [ -z `grep -o rescue /proc/cmdline` ]; then
+  echo "Executing /rc.init"
+  . /rc.init
+else
+ echo "RESCUE MODE: Dropping to shell"
+ exec setsid cttyhack sh
+fi
