@@ -1,16 +1,18 @@
 #!/bin/busybox echo "This file is sourced from /init"
 
+distro=${distro}
 live=${live}
 echo live=${live}
+echo distro=${distro}
 
-if [ ! -z "$live"]; then
+if [ ! -z "$live" ]; then
    echo "Mounting live media"
    mount $(findfs ${live}) /live
 fi
 
-if [ -r /live/boot/autostart.sh ]; then
-  echo Executing /live/boot/autostart.sh
-   . /live/boot/autostart.sh
+if [ -r /live/${distro}/boot/autostart.sh ]; then
+  echo Executing /live/${distro}/boot/autostart.sh
+   . /live/${distro}/boot/autostart.sh
 fi
 
 
