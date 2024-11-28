@@ -6,8 +6,14 @@ case $1 in
     break;
 esac
 
+if [ ! -e data.qcow2 ]; then
+  qemu-img create -f qcow2 data.qcow2 1G
+  sleep 0.5
+fi
+
+
 echo "Press CTRL-A and X to exit the emulator"
 sleep 1
 
 append="$@"
-qemu-system-x86_64 -nographic -kernel bzImage -initrd initrd.gz -append "panic=1 console=ttyS0 $append" -no-reboot
+qemu-system-x86_64 -hda data.qcow2 -nographic -kernel bzImage -initrd initrd.gz -append "panic=1 console=ttyS0 $append" -no-reboot
