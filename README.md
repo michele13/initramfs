@@ -56,10 +56,11 @@ check if the kernel command line has the `rescue` argument: if it does it drops 
 From the [kernel documentation](https://www.kernel.org/doc/html/v4.14/admin-guide/kernel-parameters.html): 
 > The kernel parses parameters from the kernel command line up to “–”; if it doesn’t recognize a parameter and it doesn’t contain a ‘.’, the parameter gets passed to init: parameters with > ‘=’ go into init’s environment, others are passed as command line arguments to init. Everything after “–” is passed as an argument to init.
 
-1. If we pass the parameter `live=/dev/sda1`, `live=LABEL=(disk-label)` or `live=UUID=(part UUID)` it will be
+1. If we pass the parameter `live=/dev/sda1`, `live=LABEL=(disk-label)` or `live=UUID=(part UUID)` to the kernel command line, the specified partitio  will be
 mounted under /live.
 
-2. If the script /live/boot/autostart.sh exists, it will be read and executed.
+2. If the script `/live/$distro/boot/autostart.sh` exists, it will be read and executed.
+   - if the  `$distro` environment variable is not passed using the kernel commandline, `init.rc` will look for `/live/boot/autostart.sh`
 
 3. It runs a root shell
 
