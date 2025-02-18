@@ -8,6 +8,7 @@ echo distro=${distro}
 # If the lenght of the string "$live" is not zero
 if [ -n "$live" ]; then
    echo "Mounting live media"
+   mkdir -p /live
    mount $(findfs ${live}) /live
 fi
 
