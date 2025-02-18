@@ -16,5 +16,5 @@ echo "Press CTRL-A and X to exit the emulator"
 sleep 1
 
 append="$@"
-qemu-system-x86_64 -hda data.qcow2 -nographic -kernel bzImage -initrd initrd.gz -append "panic=1 console=ttyS0 $append" -no-reboot
+qemu-system-x86_64 -hda data.qcow2 -nographic -kernel prebuilts/bzImage -initrd prebuilts/initrd.gz -append "panic=1 console=ttyS0 $append" -no-reboot
 reset
