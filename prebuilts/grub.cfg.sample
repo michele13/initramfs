@@ -1,0 +1,28 @@
+timeout=10
+default=0
+
+# Declare where the Grub modules are located
+#set prefix=(hd3,gpt3)/grub
+
+# Load EFI video drivers. This device is EFI so keep the
+# video mode while booting the linux kernel.
+insmod efi_gop
+insmod font
+if loadfont ${prefix}/fonts/unicode.pf2
+then
+        insmod gfxterm
+        set gfxmode=auto
+        set gfxpayload=keep
+        terminal_output gfxterm
+fi
+
+# Declare boot entries below this line
+menuentry 'Linux' {
+        root=hd3,gpt3
+        linux /vmlinuz root=PARTUUID=038f0d56-22ed-e346-b243-a86b4abf8410 quiet rootfstype=ext4 net.ifnames=0 biosdevname=0
+}
+
+menuentry 'Windows 7' {
+        root=hd2,gpt2
+        chainloader (hd2,gpt2)/EFI/MICROSOFT/BOOT/bootmgfw.efi
+}
