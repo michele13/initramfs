@@ -5,7 +5,8 @@ live=${live}
 echo live=${live}
 echo distro=${distro}
 
-if [ ! -z "$live" ]; then
+# If the lenght of the string "$live" is not zero
+if [ -n "$live" ]; then
    echo "Mounting live media"
    mount $(findfs ${live}) /live
 fi

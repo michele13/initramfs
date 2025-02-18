@@ -2,8 +2,13 @@
 
 PATH=/bin:/bin/applets
 export PATH
+/bin/busybox --install -s /bin/applets/
 
 dmesg -n 1
+
+mkdir -pv /dev /proc /sys
+mkdir -pv -m 1777 /tmp 
+
 echo "Mounting /dev"
 mount -t devtmpfs none /dev
 
