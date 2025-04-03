@@ -10,13 +10,13 @@ mkdir -pv /dev /proc /sys
 mkdir -pv -m 1777 /tmp 
 
 echo "Mounting /dev"
-mount -t devtmpfs none /dev
+mountpoint -q /dev || mount -t devtmpfs none /dev
 
 echo "Mounting /proc"
-mount -t proc none /proc
+mountpoint -q /proc || mount -t proc none /proc
 
 echo "Mounting /sys"
-mount -t sysfs none /sys
+mountpoint -q /sys || mount -t sysfs none /sys
 
 
 if [ -z `grep -o rescue /proc/cmdline` ]; then

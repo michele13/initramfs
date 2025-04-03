@@ -19,6 +19,6 @@ fi
 
 
 while true; do
-setsid cttyhack /bin/sh
+tty -s && /bin/sh || setsid cttyhack /bin/sh
 done
 
