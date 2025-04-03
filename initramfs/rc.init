@@ -5,17 +5,33 @@ live=${live}
 echo live=${live}
 echo distro=${distro}
 
+
 # If the lenght of the string "$live" is not zero
 if [ -n "$live" ]; then
+   
+   # If wait boot parameter is set, wait x seconds
+   if [ -n "$wait" ]; then
+      echo -n "Waiting for $wait seconds as requested"
+      for t in $(seq 5); do
+         echo -n .
+         sleep 1
+      done
+      echo " done"
+   fi
+   
    echo "Mounting live media"
    mkdir -p /live
    mount $(findfs ${live}) /live
+
+   # If an autostart script is found read and execute it
+   if [ -r /live/${distro}/boot/autostart.sh ]; then
+      echo Executing /live/${distro}/boot/autostart.sh
+      . /live/${distro}/boot/autostart.sh
+   fi
+
+
 fi
 
-if [ -r /live/${distro}/boot/autostart.sh ]; then
-  echo Executing /live/${distro}/boot/autostart.sh
-   . /live/${distro}/boot/autostart.sh
-fi
 
 
 while true; do

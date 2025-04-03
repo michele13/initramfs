@@ -2,4 +2,5 @@ The following boot parameters can be passed:
 
 distro= -- useful if you want to create multiple distros using a single code base
 live= -- this boot parameter will automount the device specified (eg. /dev/sda1, UUID=aaaa-bbbb, LABEL=MyLabel)
+wait= -- this waits for n seconds before mounting the device specified previously
 rescue -- boot into the ramdisk shell without mounting the live media and executing the external boot script
