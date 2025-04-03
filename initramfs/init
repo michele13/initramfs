@@ -24,5 +24,5 @@ if [ -z `grep -o rescue /proc/cmdline` ]; then
   . /rc.init
 else
  echo "RESCUE MODE: Dropping to shell"
- exec setsid cttyhack sh
+ tty -s && exec /bin/sh || exec setsid cttyhack /bin/sh
 fi
