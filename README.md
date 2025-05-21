@@ -49,7 +49,7 @@ it's the firt process of the system (PID 1). Its job is to mount `/proc`, `/sys`
 check if the kernel command line has the `rescue` argument: if it does it drops you to a shell
 (RESCUE MODE), else it reads `/rc.init` where the rest of the magic happens.
 
-## 3.2 Second stage init (/rc.init)
+### 3.2 Second stage init (/rc.init)
 
 `/rc.init` is a text file that is sourced from `/init`. We still are PID 1.
 
