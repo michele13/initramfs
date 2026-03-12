@@ -1,0 +1,6 @@
+#!/bin/sh
+export PATH=/bin
+/bin/busybox --install -s /bin
+ln -s bin /sbin
+mkdir -p /lib/modules /etc /m
+
